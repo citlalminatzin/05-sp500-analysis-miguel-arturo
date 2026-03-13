@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import pandas as pd
 from yfinance import Ticker
 
 def get_stock_data(ticker:str = "^GSPC", years: int = 5, path:str = "data/sp500.csv"):
@@ -8,12 +8,7 @@ def get_stock_data(ticker:str = "^GSPC", years: int = 5, path:str = "data/sp500.
     stock = Ticker(ticker).history(period = t)
     stock.to_csv(path, encoding = 'utf-8')
 
-def read_data(path="data/pescados.csv"):
-    """Lee los datos de un csv y te los devuelve"""
-    ...
+def read_data(path="data/sp500.csv"):
+    df= pd.read_csv("data/sp500.csv")
+    return df
 
-def main():
-    get_stock_data()
-
-if __name__ == "__main__":
-    main()

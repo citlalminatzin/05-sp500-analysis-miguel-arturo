@@ -1,66 +1,61 @@
-# Pon aquí el título de tu práctica o no, no soy tu papá
 
-(Si no eliminas esta línea lloro) Este es un archivo de ejemplo donde debes de colocar la respuesta a tus ejercicios, piénsalo como tu reporte de práctica. Aquí puedes introducir el problema y definir los términos que consideres apropiados de forma concisa.
+# Omega (12-03-2026) S&P500 Analysis using YFinance data
+# Integrantes
+* Sánchez Ramírez Diego Alberto 
+* Dominguez Leon Jose Miguel
 
-## Integrantes
+## 1. ¿Dependen los precios del S&P500 del precio anterior?
 
-(Si no eliminas esta línea lloro) Escribe tus integrantes iniciando por apellido de forma alfabética
-
-- (Si no modificas esta línea lloro) Babilonia, Aureliano
-- (Si no modificas esta línea lloro) Buendía, Aureliano
-- (Si no modificas esta línea lloro) Segundo, Aureliano
+![Grafica de hace 5 años](media/S&P500_5Y.png)
 
 
-## Uso e instalación
+Sí, los precios del S&P500 parecen depender fuertemente del precio anterior.
 
-(Si no eliminas esta línea lloro) Aquí escribe qué necesitas que instale para ejecutar tu código, por ejemplo:
+En la gráfica del precio del índice se observa una trayectoria continua y suave, donde los cambios entre días consecutivos son relativamente pequeños comparados con el nivel total del índice. Esto sugiere que el precio actual $P_t$ está altamente relacionado con el precio del periodo anterior $P_{t-1}$
+Matemáticamente esto puede modelarse como un random walk: $P_t= P_{t-1} +\epsilon_t$ donde $\epsilon_t$ es un término aleatorio que representa nueva información en el mercado.
 
-- `matplotlib`
-- `yfinance` (para usar `data.py`)
+Esto implica que $Corr(P_t, P_{t-1})\approx 1$
 
-(Si no eliminas esta línea lloro) Y dime cómo debería ejecutar tu código y en qué orden. Recuerda que antes de ejecutar tu código leeré tu `README.md`. Por ejemplo la manera en la que propongo que organizes tu código es
+Por lo tanto, sí existe dependencia fuerte entre precios consecutivos.
+## ¿Dependen los rendimientos del rendimiento anterior?
 
-- `main.py`: Contiene el código para graficar cada uno de los tres ejercicios
-- `` (Por favor modifica esta línea)
+![Grafica de rendimientos](media/Rendiminetos.png)
 
-## Ejercicio 1
+No parece haber una dependencia clara entre rendimientos consecutivos.
 
-(Por favor modifica esta línea, lo suplico por piedad) Aquí puedes colocar la discusión del modelo, tu interpretación, el efecto de las condiciones iniciales. No tiene que ser perfecto, pero entre más casos puedas cubrir mejor
+En la gráfica de rendimientos se observa que:
 
-## Ejercicio 2
+1. los valores oscilan alrededor de cero
 
-(Por favor modifica esta línea, tú puedes yo creo en ti) Puedes darle formato de **negritas**, *itálicas*, incluir texto matemático $x\approx 1, \epsilon > 0$, [enlaces](https://www.markdownguide.org/cheat-sheet/), `código`,
+2. no existe una tendencia clara
 
-```python
-# Esto es un ejemplo, lo puedes quitar
-print("Código en bloque")
-```
+3. las variaciones positivas y negativas parecen aleatorias
 
-(Si no eliminas esta línea lloro) También puedes incluir citas
+Esto sugiere que $E[r_t|r_{t-1}] \approx 0$ con $E$ siendo el valor esperado o esperanza matematica y $r_t$ es el rendimiento en el tiempo $t$. Además $Corr(r_t, r_{t-1})\approx 0$ por lo que la información pasada no permite predecir rendimientos futuros.
 
-> Por favor elimina esta cita
+## ¿Cómo intentarías predecir los rendimientos del S&P500?
+Dado que los rendimientos parecen comportarse como una serie aproximadamente aleatoria, una forma simple de predecirlos sería usar el promedio histórico:
 
-(Si no eliminas esta línea lloro) Puedes incluir notas al pie [^1].
+$\hat{r}= \dfrac{1}{n} \sum_{t=1}^{n}r_t$
 
-## Ejercicio 3
+## ¿Debería invertir todos mis ahorros en el S&P500 en lugar de CETES a 1 año?
+No, aunque el índice muestra una tendencia creciente en los últimos cinco años, también presenta caídas importantes y volatilidad, como se observa en las fluctuaciones de la gráfica.
 
-(Puedes modificar esta línea, su único propósito es existir para ser modificada, cada momento que existe en su forma original llora por no formar parte de la formación de jovenes matemáticas como tú) También se pueden incluir imágenes. Aunque a veces aunque se muestre localmente, no significa que se vaya a mostrar en GitHub. Por ejemplo, adjunto una imagen de una bella rosa:
+Por otro lado, los CETES ofrecen:
+1. menor riesgo
 
-![Texto alternativo, imagen de la cara de un Mr. Meeseks en fondo azul con la leyenda Existence is Pain por debajo](media/existence_is_pain.jpg)
+2. rendimientos más estables
 
-### También puedes agregar tablas y eliminar este sub encabezado
+3. mayor certidumbre a corto plazo
 
-| Elimíname | Elimíname a mí también |
-| -------------- | --------------- |
-| $1$ | $54$ |
-| $2$ | $1000$ |
+Por lo tanto, desde un punto de vista financiero, sería más prudente diversificar la inversión entre activos de riesgo (acciones) y activos de renta fija (CETES).
 
-(Si no eliminas esta línea lloro) Y luego puedes comentar que con base en la tabla anterior, se ve una explosión en los valores a partir del tiempo $t=2$. 
+## ¿Cambiaría tu respuesta si sólo invirtieras fondos discrecionales?
+Sí.
+Si el dinero invertido corresponde a fondos discrecionales, es decir, dinero cuya pérdida no afecta significativamente la estabilidad financiera personal, entonces invertir en el S&P500 podría ser más razonable.
 
-## Conclusión
 
-(Por favor modifica esta línea bro, es la última que tienes que modificar bro, por favor bro) Es buena práctica concluir tus prácticas. ¿Qué te llevas? ¿Sientes que fue relevante para ti? ¿Se te complicó algún aspecto? ¿Hubo algún resultado que contradijera tu intuición? 
+## ¿Cambiarían las respuestas si el plazo fuera de 20 años en lugar de 1?
+Sí, especialmente respecto a la decisión de inversión.
 
----
-
-[^1]: Sólo soy una nota al pie, elimíname bro, por favor bro.
+A largo plazo (por ejemplo 20 años), los mercados accionarios como el S&P 500 históricamente han mostrado rendimientos promedio mayores que los instrumentos de renta fija.
